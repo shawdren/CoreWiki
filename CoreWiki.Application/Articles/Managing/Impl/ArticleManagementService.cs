@@ -12,6 +12,7 @@ using CoreWiki.Core.Domain;
 using CoreWiki.Data.Abstractions.Interfaces;
 using MediatR;
 using NodaTime;
+using Microsoft.Extensions.Logging;
 
 namespace CoreWiki.Application.Articles.Managing.Impl
 {
@@ -25,6 +26,7 @@ namespace CoreWiki.Application.Articles.Managing.Impl
 		private readonly IMediator _mediator;
 		private readonly IMapper _mapper;
 		private readonly IClock _clock;
+		private readonly ILogger _Logger;
 
 		public ArticleManagementService(IArticleRepository repository, ICommentRepository commentRepository, ISlugHistoryRepository slugHistoryRepository,IMediator mediator, IMapper mapper,  IClock clock)
 		{
@@ -170,5 +172,5 @@ namespace CoreWiki.Application.Articles.Managing.Impl
 
 		private bool Changed(string v1, string v2)
 			=> !string.Equals(v1, v2, StringComparison.InvariantCulture);
-	}
+    }
 }

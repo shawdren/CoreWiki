@@ -70,8 +70,9 @@ namespace CoreWiki.Pages
 
 			var cmd = _mapper.Map<EditArticleCommand>(Article);
 			var cwUser = await _UserManager.GetUserAsync(User);
-			cmd = _mapper.Map(cwUser, cmd);
-
+			//cmd = _mapper.Map(cwUser, cmd);
+			cmd.AuthorId = Guid.Parse(cwUser.Id);
+			cmd.AuthorName = cwUser.UserName;
 			var result = await _mediator.Send(cmd);
 
 			if (result.Exception is InvalidTopicException)

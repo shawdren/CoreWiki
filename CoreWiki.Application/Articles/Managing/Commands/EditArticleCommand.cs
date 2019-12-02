@@ -15,7 +15,7 @@ namespace CoreWiki.Application.Articles.Managing.Commands
 
 		//public EditArticleCommand()
 		//{
-			
+
 		//}
 
 		//public EditArticleCommand(int id, string topic, string content, Guid authorId, string authorName)
