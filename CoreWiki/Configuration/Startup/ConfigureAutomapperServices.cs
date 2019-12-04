@@ -16,7 +16,7 @@ namespace CoreWiki.Configuration.Startup
 				cfg.AddProfile<CoreWikiWebsiteProfile>();
 			});
 
-			config.AssertConfigurationIsValid();
+			//config.AssertConfigurationIsValid();
 			var mapper = config.CreateMapper();
 
 			services?.AddSingleton(mapper);

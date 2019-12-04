@@ -28,29 +28,28 @@ namespace CoreWiki.Areas.Identity
 				})
 					.AddRoles<IdentityRole>()
 					.AddRoleManager<RoleManager<IdentityRole>>()
-					.AddDefaultUI()
 					.AddDefaultTokenProviders()
 					.AddEntityFrameworkStores<CoreWikiIdentityContext>();
 
 				var authBuilder = services.AddAuthentication();
 
-				if (!string.IsNullOrEmpty(context.Configuration["Authentication:Microsoft:ApplicationId"]))
-				{
-					authBuilder.AddMicrosoftAccount(microsoftOptions =>
-					{
-						microsoftOptions.ClientId = context.Configuration["Authentication:Microsoft:ApplicationId"];
-						microsoftOptions.ClientSecret = context.Configuration["Authentication:Microsoft:Password"];
-					});
-				}
+				//if (!string.IsNullOrEmpty(context.Configuration["Authentication:Microsoft:ApplicationId"]))
+				//{
+				//	authBuilder.AddMicrosoftAccount(microsoftOptions =>
+				//	{
+				//		microsoftOptions.ClientId = context.Configuration["Authentication:Microsoft:ApplicationId"];
+				//		microsoftOptions.ClientSecret = context.Configuration["Authentication:Microsoft:Password"];
+				//	});
+				//}
 
-				if (!string.IsNullOrEmpty(context.Configuration["Authentication:Twitter:ConsumerKey"]))
-				{
-					authBuilder.AddTwitter(twitterOptions =>
-					{
-						twitterOptions.ConsumerKey = context.Configuration["Authentication:Twitter:ConsumerKey"];
-						twitterOptions.ConsumerSecret = context.Configuration["Authentication:Twitter:ConsumerSecret"];
-					});
-				}
+				//if (!string.IsNullOrEmpty(context.Configuration["Authentication:Twitter:ConsumerKey"]))
+				//{
+				//	authBuilder.AddTwitter(twitterOptions =>
+				//	{
+				//		twitterOptions.ConsumerKey = context.Configuration["Authentication:Twitter:ConsumerKey"];
+				//		twitterOptions.ConsumerSecret = context.Configuration["Authentication:Twitter:ConsumerSecret"];
+				//	});
+				//}
 
 				services.AddAuthorization(AuthPolicy.Execute);
 			});

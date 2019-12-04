@@ -3,7 +3,6 @@ using CoreWiki.Data.EntityFramework.Security;
 using CoreWiki.Notifications.Abstractions.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -18,7 +17,6 @@ namespace CoreWiki.Areas.Identity.Pages.Account
 		private readonly SignInManager<CoreWikiUser> _signInManager;
 		private readonly UserManager<CoreWikiUser> _userManager;
 		private readonly ILogger<RegisterModel> _logger;
-		private readonly IEmailSender _emailSender;
 		private readonly INotificationService _notificationService;
 		private readonly HIBPClient _HIBPClient;
 
@@ -26,14 +24,12 @@ namespace CoreWiki.Areas.Identity.Pages.Account
 			UserManager<CoreWikiUser> userManager,
 			SignInManager<CoreWikiUser> signInManager,
 			ILogger<RegisterModel> logger,
-			IEmailSender emailSender,
 			INotificationService notificationService,
 			HIBPClient hIBPClient)
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
 			_logger = logger;
-			_emailSender = emailSender;
 			_notificationService = notificationService;
 			_HIBPClient = hIBPClient;
 		}

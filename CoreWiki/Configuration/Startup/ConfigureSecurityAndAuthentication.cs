@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CoreWiki.Data.EntityFramework.Security;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +21,7 @@ namespace CoreWiki.Configuration.Startup
 			return services;
 		}
 
-		public static IApplicationBuilder ConfigureSecurityHeaders(this IApplicationBuilder app, IHostingEnvironment env)
+		public static IApplicationBuilder ConfigureSecurityHeaders(this IApplicationBuilder app, IHostEnvironment env)
 		{
 			if (!env.IsDevelopment())
 			{

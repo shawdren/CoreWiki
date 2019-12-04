@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CoreWiki.Data.EntityFramework.Security;
 using CoreWiki.Notifications.Abstractions.Notifications;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,18 +16,15 @@ namespace CoreWiki.Areas.Identity.Pages.Account.Manage
 	{
 		private readonly UserManager<CoreWikiUser> _userManager;
 		private readonly SignInManager<CoreWikiUser> _signInManager;
-		private readonly IEmailSender _emailSender;
 		private readonly INotificationService _notificationService;
 
 		public IndexModel(
 					UserManager<CoreWikiUser> userManager,
 					SignInManager<CoreWikiUser> signInManager,
-					IEmailSender emailSender,
 					INotificationService notificationService)
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
-			_emailSender = emailSender;
 			_notificationService = notificationService;
 		}
 

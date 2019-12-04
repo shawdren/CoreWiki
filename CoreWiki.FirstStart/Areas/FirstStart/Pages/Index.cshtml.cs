@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoreWiki.Data.EntityFramework.Security;
+﻿using CoreWiki.Data.EntityFramework.Security;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CoreWiki.FirstStart.MyFeature.Pages
 {
 	public class IndexModel : PageModel
 	{
-
 		public IndexModel(IHostingEnvironment env,
 			IConfiguration config, ILoggerFactory loggerFactory,
 			UserManager<CoreWikiUser> userManager,
@@ -33,7 +28,6 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 			this.Logger = loggerFactory.CreateLogger("FirstStart");
 			this.UserManager = userManager;
 			this.RoleManager = roleManager;
-
 		}
 
 		public IHostingEnvironment Environment { get; }
@@ -41,6 +35,7 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 
 		[BindProperty()]
 		public FirstStartConfiguration FirstStartConfig { get; set; }
+
 		public ILogger Logger { get; }
 		public UserManager<CoreWikiUser> UserManager { get; }
 		public RoleManager<IdentityRole> RoleManager { get; }
@@ -48,13 +43,11 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 
 		public void OnGet()
 		{
-
 		}
 
 		[HttpPost()]
 		public async Task<IActionResult> OnPostAsync()
 		{
-
 			if (!ModelState.IsValid)
 			{
 				return Page();
@@ -73,13 +66,15 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 			{
 				var result = await UserManager.AddToRoleAsync(newAdminUser, "Administrators");
 			}
-			else {
+			else
+			{
 				Logger.LogError($"Error creating user: {userResult.Errors.First().Description}");
 				ModelState.AddModelError("", $"There was an error creating the admin user: {userResult.Errors.First().Description}");
 				return Page();
 			}
 
-			if (string.IsNullOrEmpty(FirstStartConfig.ConnectionString)) {
+			if (string.IsNullOrEmpty(FirstStartConfig.ConnectionString))
+			{
 				FirstStartConfig.ConnectionString = "DataSource=./App_Data/wikiContent.db";
 				FirstStartConfig.Database = "SQLite";
 			}
@@ -90,15 +85,11 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 			return Page();
 
 			//return RedirectToPage("/Details", new { slug = "home-page" });
-
 		}
-
 
 		private void WriteConfigFileToDisk(string provider, string connectionString)
 		{
-
 			// ramblinggeek cheered 500 bits on November 4, 2018
-
 
 			var settingsFileLocation = Path.Combine(Environment.ContentRootPath, "appsettings.json");
 
@@ -119,9 +110,7 @@ namespace CoreWiki.FirstStart.MyFeature.Pages
 			jsonFile["DataProvider"] = provider;
 			jsonFile["ConnectionStrings"]["CoreWikiData"] = connectionString;
 
-
 			System.IO.File.WriteAllText(settingsFileLocation, JsonConvert.SerializeObject(jsonFile, Formatting.Indented));
-
 		}
 	}
 }

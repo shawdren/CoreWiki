@@ -2,8 +2,8 @@ using CoreWiki.Configuration.Settings;
 using CoreWiki.Configuration.Startup;
 using CoreWiki.Data.EntityFramework.Security;
 using CoreWiki.FirstStart;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,11 +37,10 @@ namespace CoreWiki
 			services.AddMediator();
 
 			services.AddFirstStartConfiguration(Configuration);
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptionsSnapshot<AppSettings> settings, UserManager<CoreWikiUser> userManager, RoleManager<IdentityRole> roleManager)
+		public void Configure(IApplicationBuilder app, IHostEnvironment env, IOptionsSnapshot<AppSettings> settings, UserManager<CoreWikiUser> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			app.ConfigureTelemetry();
 			app.ConfigureExceptions(env);

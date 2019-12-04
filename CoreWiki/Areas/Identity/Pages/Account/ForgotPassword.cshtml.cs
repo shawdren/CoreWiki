@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using CoreWiki.Data.EntityFramework.Security;
 using CoreWiki.Notifications.Abstractions.Notifications;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,13 +16,11 @@ namespace CoreWiki.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<CoreWikiUser> _userManager;
-        private readonly IEmailSender _emailSender;
 	    private readonly INotificationService _notificationService;
 
-	    public ForgotPasswordModel(UserManager<CoreWikiUser> userManager, IEmailSender emailSender, INotificationService notificationService)
+	    public ForgotPasswordModel(UserManager<CoreWikiUser> userManager,  INotificationService notificationService)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
 	        _notificationService = notificationService;
         }
 
